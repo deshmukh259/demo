@@ -1,9 +1,9 @@
-package com.springboot.demo.controller;
+package com.springboot.demo.serializer;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -49,7 +49,7 @@ public class CamelToSnakeCaseDeserializer extends JsonDeserializer<Map<String, O
         return arrayNode.toString();
     }
 
-    private String toSnakeCase(String camelCase) {
+    private String  toSnakeCase(String camelCase) {
         StringBuilder snakeCase = new StringBuilder();
         for (int i = 0; i < camelCase.length(); i++) {
             char c = camelCase.charAt(i);

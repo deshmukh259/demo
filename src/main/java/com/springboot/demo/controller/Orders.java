@@ -3,6 +3,8 @@ package com.springboot.demo.controller;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.springboot.demo.serializer.CamelToSnakeCaseDeserializer;
+import com.springboot.demo.serializer.SnakeToCamelCaseSerializer;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.JdbcTypeCode;
@@ -25,6 +27,8 @@ public class Orders {
 
     @Column
     private String itemName;
+
+
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(columnDefinition = "jsonb")
     @JsonSerialize(using = SnakeToCamelCaseSerializer.class)
