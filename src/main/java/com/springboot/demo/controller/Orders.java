@@ -34,4 +34,7 @@ public class Orders {
     @JsonSerialize(using = SnakeToCamelCaseSerializer.class)
     @JsonDeserialize(using = CamelToSnakeCaseDeserializer.class)
     private Map<String, Object> config;
+
+    @Version
+    private Integer version;
 }
