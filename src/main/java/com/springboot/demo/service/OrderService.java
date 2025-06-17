@@ -20,7 +20,7 @@ public class OrderService {
     }
     public Orders update(Orders orders) {
 
-        Orders byId = orderRepository.findById(orders.getId() )
+        Orders byId = orderRepository.findById(orders.getId())
                 .orElseThrow(()->new RuntimeException("order not found"));;
 
         byId.setConfig(orders.getConfig());
@@ -28,7 +28,8 @@ public class OrderService {
 
 
 
-        return orderRepository.save(orders);
+        return byId;
+      //  return orderRepository.save(byId);
     }
 
     public List<Orders> fetchAll() {
