@@ -19,6 +19,7 @@ import java.util.Map;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 public class Orders {
 
     @Id

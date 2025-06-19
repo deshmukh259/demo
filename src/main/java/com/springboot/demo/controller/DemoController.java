@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/v1/")
 public class DemoController {
 
 
@@ -16,7 +17,7 @@ public class DemoController {
     private OrderService orderService;
 
     @Transactional
-    @PostMapping("/api/v1/order")
+    @PostMapping("order")
     public Orders create(@RequestBody Orders orders){
 
         System.out.println(orders);
@@ -25,7 +26,7 @@ public class DemoController {
     }
 
   @Transactional
-    @PutMapping("/api/v1/order")
+    @PutMapping("order")
     public Orders update(@RequestBody Orders orders){
 
         System.out.println(orders);
@@ -33,9 +34,18 @@ public class DemoController {
 
     }
 
-    @GetMapping("/api/v1/order")
+    @GetMapping("orders")
     public List<Orders> list(){
         return orderService.fetchAll();
     }
 
+    @GetMapping("orders/{id}")
+    public Orders order(@PathVariable int id){
+        return orderService.getOrder(id);
+    }
+
+    @GetMapping("clear-cache")
+    public boolean clearCache(){
+        return orderService.clearCache();
+    }
 }
