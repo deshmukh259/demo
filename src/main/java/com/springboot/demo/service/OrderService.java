@@ -3,6 +3,7 @@ package com.springboot.demo.service;
 import com.springboot.demo.controller.Orders;
 import com.springboot.demo.repo.OrderRepository;
 import jakarta.persistence.LockModeType;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.Cache;
@@ -16,12 +17,11 @@ import java.util.List;
 import java.util.Optional;
 @Slf4j
 @Service
+@AllArgsConstructor
 public class OrderService {
 
-    @Autowired
-    private CacheManager cacheManager;
-    @Autowired
-    private OrderRepository orderRepository;
+    private final CacheManager cacheManager;
+    private final OrderRepository orderRepository;
 
     @CachePut(cacheNames = "orders",key = "#orders.id")
     public Orders save(Orders orders) {
