@@ -19,3 +19,10 @@ start-dev
 
 4: connection pooling 2 impl
 
+
+
+basic spring security 
+
+curl --location 'localhost:8085/hello' \
+--header 'Authorization: Basic dGVzdDE6MTIzNDU=' \
+--header 'Cookie: JSESSIONID=5110A493121C75DAE5AA56A1FE192754'
