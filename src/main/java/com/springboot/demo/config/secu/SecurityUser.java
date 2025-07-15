@@ -1,19 +1,31 @@
 package com.springboot.demo.config.secu;
 
+import com.springboot.demo.model.UserDetails;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
-@AllArgsConstructor
-public class SecurityUser implements UserDetails {
+import java.util.stream.Collectors;
 
-    private com.springboot.demo.UserDetails userDetails;
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@Builder
+public class SecurityUser implements org.springframework.security.core.userdetails.UserDetails {
+
+    private UserDetails userDetails;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(()->"read");
+        return userDetails.getUserAuthorities().stream().map(e->{
+            GrantedAuthority grantedAuthority1 = () -> e.getName();
+            return  grantedAuthority1;
+        }).collect(Collectors.toList());
     }
 
     @Override

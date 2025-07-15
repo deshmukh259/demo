@@ -1,6 +1,6 @@
 package com.springboot.demo.service;
 
-import com.springboot.demo.UserDetails;
+import com.springboot.demo.model.UserDetails;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
