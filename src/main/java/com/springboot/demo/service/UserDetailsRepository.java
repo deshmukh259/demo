@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface UserDetailsRepository extends JpaRepository<UserDetails,Long> {
+public interface UserDetailsRepository extends JpaRepository<UserDetails, Long> {
 
     @Query(value = """
             SELECT u.* FROM user_details u WHERE u.user_name = :username

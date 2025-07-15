@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
@@ -22,9 +21,9 @@ public class SecurityUser implements org.springframework.security.core.userdetai
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return userDetails.getUserAuthorities().stream().map(e->{
+        return userDetails.getUserAuthorities().stream().map(e -> {
             GrantedAuthority grantedAuthority1 = () -> e.getName();
-            return  grantedAuthority1;
+            return grantedAuthority1;
         }).collect(Collectors.toList());
     }
 

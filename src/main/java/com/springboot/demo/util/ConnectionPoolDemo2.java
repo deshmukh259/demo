@@ -10,19 +10,21 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class ConnectionPoolDemo2 {
 
 
-    public static final  Queue<Connection> connQueue= new LinkedList<>();
-static {
-    try {
-        Class.forName("org.postgresql.Driver");
-    } catch (ClassNotFoundException e) {
-        throw new RuntimeException(e);
+    public static final Queue<Connection> connQueue = new LinkedList<>();
 
+    static {
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+
+        }
     }
-}
+
     public static void main(String[] args) {
 
         Worker work = new SqlWorker();
-        executeWork(2,100,work);
+        executeWork(2, 100, work);
     }
 
     private static void executeWork(int maxConn, int request, Worker work) {
@@ -34,7 +36,7 @@ static {
         AtomicInteger vv = new AtomicInteger();
         for (AtomicInteger j = new AtomicInteger(); j.get() < request; j.getAndIncrement()) {
 
-            Runnable r =()-> submitTask(work, vv.incrementAndGet());
+            Runnable r = () -> submitTask(work, vv.incrementAndGet());
             new Thread(r).start();
 
         }
@@ -43,11 +45,11 @@ static {
     private static void submitTask(Worker work, int i) {
 
         boolean isDone = false;
-        for (; !isDone;) {
-            if(!connQueue.isEmpty()){
+        for (; !isDone; ) {
+            if (!connQueue.isEmpty()) {
                 Connection conn;
                 //System.out.println(Thread.currentThread()+" Thread started working");
-                synchronized (connQueue){
+                synchronized (connQueue) {
                     try {
                         Thread.sleep(10);
                     } catch (InterruptedException e) {
@@ -55,15 +57,15 @@ static {
                     }
                     conn = connQueue.poll();
                 }
-                if(conn!= null){
-                    work.doWork(conn,i);
+                if (conn != null) {
+                    work.doWork(conn, i);
                     synchronized (connQueue) {
                         connQueue.add(conn);
                     }
                     //System.out.println("Thread end");
                     isDone = true;
                 }
-            }else {
+            } else {
                 //System.out.println("all connection are busy... waiting");
 
                 try {
@@ -75,10 +77,10 @@ static {
         }
     }
 
-    private static Connection createConnection1()  {
+    private static Connection createConnection1() {
 
         try {
-            return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres","postgres","postgres");
+            return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

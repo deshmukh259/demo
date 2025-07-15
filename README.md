@@ -1,10 +1,7 @@
 1: hibernate serializable deserialization
 2: @version - use (optimistic locking)
 
-
-
-
-3: key clock 
+3: key clock
 
 http://localhost:8080
 
@@ -15,18 +12,16 @@ docker run -d \
 -p 8080:8080 \
 quay.io/keycloak/keycloak:24.0.1 \
 start-dev
+
 ## still working
 
 4: connection pooling 2 impl
 
-
-
-basic spring security 
+basic spring security
 
 curl --location 'localhost:8085/hello' \
 --header 'Authorization: Basic dGVzdDE6MTIzNDU=' \
 --header 'Cookie: JSESSIONID=5110A493121C75DAE5AA56A1FE192754'
-
 
 security filter
 

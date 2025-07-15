@@ -22,6 +22,6 @@ public class UserAuthority {
 
     @ManyToOne
     @JoinColumn(name = "userName", referencedColumnName = "userName",
-            insertable = false,updatable = false)
+            insertable = false, updatable = false)
     private UserDetails userDetails;
 }

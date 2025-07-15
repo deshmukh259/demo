@@ -13,9 +13,10 @@ import java.util.Optional;
 public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
 
     private final UserDetailsRepository userDetailsRepository;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<com.springboot.demo.model.UserDetails> byUserName = userDetailsRepository.findByUserName(username);
-     return byUserName.map(SecurityUser::new).orElseThrow(()->new UsernameNotFoundException("Username not found"));
+        return byUserName.map(SecurityUser::new).orElseThrow(() -> new UsernameNotFoundException("Username not found"));
     }
 }

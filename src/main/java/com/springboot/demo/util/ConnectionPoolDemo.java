@@ -18,11 +18,12 @@ public class ConnectionPoolDemo {
 
         }
     }
+
     public static void main(String[] args) throws SQLException, ClassNotFoundException, InterruptedException {
         //withoutConnectioPool();
         ArrayBlockingQueue<Connection> queue = (ArrayBlockingQueue<Connection>) getConnections(10);
-        for (AtomicInteger i = new AtomicInteger(); i.get() <1000; ) {
-        Runnable rr = ()-> {
+        for (AtomicInteger i = new AtomicInteger(); i.get() < 1000; ) {
+            Runnable rr = () -> {
                 if (true || !queue.isEmpty()) {
                     i.getAndIncrement();
                     Connection poll = null;
@@ -40,7 +41,7 @@ public class ConnectionPoolDemo {
                         throw new RuntimeException(e);
                     }
 
-                }else {
+                } else {
                     try {
                         //System.out.println("queue is empty wait..");
 
@@ -50,7 +51,7 @@ public class ConnectionPoolDemo {
                     }
                 }
             };
-        new Thread(rr).start();
+            new Thread(rr).start();
         }
 
 
@@ -59,8 +60,8 @@ public class ConnectionPoolDemo {
     private static Queue<Connection> getConnections(int min) throws SQLException, ClassNotFoundException {
 
 
-        Queue<Connection> queue = new ArrayBlockingQueue<>(min+5);
-        for (int i = 0; i <min; i++) {
+        Queue<Connection> queue = new ArrayBlockingQueue<>(min + 5);
+        for (int i = 0; i < min; i++) {
             Connection connection = createConnection();
             queue.add(connection);
         }
@@ -69,18 +70,18 @@ public class ConnectionPoolDemo {
 
     private static void withoutConnectioPool() {
         System.out.println("ConnectionPoolDemo.main");
-        long  st =System.currentTimeMillis();
-        for (int i=0;i<99;i++) {
-          Runnable r = ()->{
-              try {
-                  Connection conn = createConnection();
-                  executeQuery(conn);
-                  conn.close();
-              } catch (Exception e) {
-                      throw new RuntimeException(e);
-              }
+        long st = System.currentTimeMillis();
+        for (int i = 0; i < 99; i++) {
+            Runnable r = () -> {
+                try {
+                    Connection conn = createConnection();
+                    executeQuery(conn);
+                    conn.close();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
 
-          };
+            };
             new Thread(r).start();
         }
         //   System.out.println("done in "+(System.currentTimeMillis()-st)+" ms");
@@ -89,14 +90,13 @@ public class ConnectionPoolDemo {
     private static void executeQuery(Connection conn) throws SQLException {
         ResultSet resultSet = conn.createStatement().executeQuery("Select now();");
         resultSet.next();
-        System.out.println("select called "+resultSet.getString(1));
+        System.out.println("select called " + resultSet.getString(1));
     }
 
     private static Connection createConnection() throws ClassNotFoundException, SQLException {
 
 
-
-        return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres","postgres","postgres");
+        return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
 
     }
 
