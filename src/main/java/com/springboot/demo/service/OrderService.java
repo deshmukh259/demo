@@ -48,6 +48,11 @@ public class OrderService {
 
     @Cacheable(cacheNames = "orders", key = "#id")
     public Orders getOrder(long id) {
+        return getOrders(id);
+    }
+
+    private Orders getOrders(long id) {
+        System.out.println(" from db id = " + id);
         return orderRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
