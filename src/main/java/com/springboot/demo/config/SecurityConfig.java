@@ -3,7 +3,7 @@ package com.springboot.demo.config;
 
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+//@Configuration
 //@EnableMethodSecurity
 public class SecurityConfig {
 

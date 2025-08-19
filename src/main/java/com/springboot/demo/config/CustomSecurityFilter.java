@@ -1,5 +1,6 @@
 package com.springboot.demo.config;
 
+import com.springboot.demo.config.authen.CustomAuthentication;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -15,7 +16,6 @@ import java.io.IOException;
 
 @Component
 @AllArgsConstructor
-
 public class CustomSecurityFilter extends OncePerRequestFilter {
 
     private final CustomAuthenticationManager authenticationManager;
@@ -23,10 +23,13 @@ public class CustomSecurityFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
+        String key = request.getHeader("key");
+        CustomAuthentication customAuthentication = new CustomAuthentication(false,key);
 
-        var a = authenticationManager.authenticate(null);
+
+        var a = authenticationManager.authenticate(customAuthentication);
         if(a.isAuthenticated()){
-            SecurityContextHolder.getContext().setAuthentication(a);
+            SecurityContextHolder.getContext().setAuthentication(a); //very imp,
 
             filterChain.doFilter(request,response);
         }
