@@ -1,4 +1,4 @@
-package com.springboot.demo.controller;
+package com.springboot.demo.entity;
 
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
