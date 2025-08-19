@@ -16,7 +16,7 @@ public class CustomAuthProvider implements AuthenticationProvider {
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-
+//STEP3
         CustomAuthentication ca = (CustomAuthentication) authentication;
         String headerKey = ca.getKey();
 

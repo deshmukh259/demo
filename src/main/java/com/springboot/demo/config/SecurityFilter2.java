@@ -14,7 +14,7 @@ public class SecurityFilter2 {
     private final CustomSecurityFilter customSecurityFilter;
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
+//STEP0 -> this will be setup at start of service
         return http
                 .csrf().disable()
                 .addFilterAt(customSecurityFilter, UsernamePasswordAuthenticationFilter.class)

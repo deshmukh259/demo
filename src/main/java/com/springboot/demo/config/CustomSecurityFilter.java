@@ -22,7 +22,7 @@ public class CustomSecurityFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-
+//STEP1
         String key = request.getHeader("key");
         CustomAuthentication customAuthentication = new CustomAuthentication(false,key);
 

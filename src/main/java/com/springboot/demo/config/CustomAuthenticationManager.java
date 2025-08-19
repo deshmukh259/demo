@@ -15,7 +15,7 @@ public class CustomAuthenticationManager implements AuthenticationManager {
     private final CustomAuthProvider customAuthProvider;
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-
+//STEP2
         if(customAuthProvider.supports(authentication.getClass())){
             return customAuthProvider.authenticate(authentication);
         }
