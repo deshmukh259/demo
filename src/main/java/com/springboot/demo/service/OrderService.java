@@ -50,8 +50,8 @@ public class OrderService {
     }
 
     @Cacheable(cacheNames = "orders", key = "#id")
-    public Orders getOrder(long id) {
-        return getOrders(id);
+    public String getOrder(long id) {
+        return getOrders(id).getItemName();
     }
 
     private Orders getOrders(long id) {

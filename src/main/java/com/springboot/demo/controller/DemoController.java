@@ -43,7 +43,7 @@ public class DemoController {
     }
 
     @GetMapping("/orders/{id}")
-    public Orders order(@PathVariable int id) {
+    public String order(@PathVariable int id) {
         return orderService.getOrder(id);
     }
 
